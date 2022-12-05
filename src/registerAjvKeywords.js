@@ -1,4 +1,4 @@
-import { checkInn } from './rules';
+import { checkInn } from './rules.js';
 
 export default (ajv) => {
   ajv.addKeyword('isNotEmpty', {

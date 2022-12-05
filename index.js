@@ -1,7 +1,7 @@
 import Ajv from 'ajv';
 import JSONSchemaBridge from 'uniforms-bridge-json-schema';
 import localize from 'ajv-i18n';
-import registerAjvKeywords from './registerAjvKeywords';
+import registerAjvKeywords from './src/registerAjvKeywords.js';
 
 export const ajv = new Ajv({ allErrors: true, useDefaults: true, coerceTypes: true, strict: false });
 ajv.addKeyword('uniforms');
