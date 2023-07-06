@@ -27,12 +27,13 @@ function createValidator(schema, additionalValidator) {
       errors = validator.errors;
     }
 
+    errors.length && localize.ru(errors);
+
     if (additionalValidator) {
       errors = errors.concat(additionalValidator(model));
     }
 
     if (errors.length) {
-      localize.ru(errors);
       return { details: errors };
     }
   };
