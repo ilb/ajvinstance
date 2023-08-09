@@ -3,7 +3,18 @@ import JSONSchemaBridge from 'uniforms-bridge-json-schema';
 import localize from 'ajv-i18n';
 import registerAjvKeywords from './src/registerAjvKeywords.js';
 
-export const ajv = new Ajv({ allErrors: true, useDefaults: true, coerceTypes: true, strict: false });
+import ajv_keywords from 'ajv-keywords';
+
+export const ajv = new Ajv({
+  allErrors: true,
+  useDefaults: true,
+  coerceTypes: true,
+  strict: false,
+  removeAdditional: true,
+});
+
+ajv_keywords(ajv, ["transform"]);
+
 ajv.addKeyword('uniforms');
 ajv.addKeyword('options');
 
