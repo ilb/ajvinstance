@@ -5,7 +5,7 @@ const maskedNumberLengthStrict = {
     validate.errors = [
       {
         keyword: 'maskedNumberLengthStrict',
-        message: 'должно быть длинной ' + length + ' символов',
+        message: 'Значение должно быть длинной ' + length + ' символов',
         params: { keyword: 'maskedNumberLengthStrict' },
       },
     ];

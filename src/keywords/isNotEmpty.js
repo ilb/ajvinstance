@@ -5,7 +5,7 @@ const isNotEmpty = {
     validate.errors = [
       {
         keyword: 'isNotEmpty',
-        message: 'должно иметь обязательное поле ' + key.parentDataProperty,
+        message: 'Поле обязательно для заполнения',
         params: { keyword: 'isNotEmpty' },
       },
     ];

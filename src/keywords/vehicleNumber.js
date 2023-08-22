@@ -1,7 +1,7 @@
 const vehicleNumber = {
-  type: 'number',
+  type: 'string',
   errors: true,
-  validate: function validate(schema, data, parent, key) {
+  validate: function validate(schema, data) {
     validate.errors = [
       {
         keyword: 'vehicleNumber',
@@ -10,7 +10,7 @@ const vehicleNumber = {
       },
     ];
 
-    return /^([0-9ABCDEFGHJKLMNPRSTUVWXYZ]{17})$/.test(data);
+    return /^([0-9ABCDEFGHJKLMNPRSTUVWXYZ]{17})?$/.test(data);
   },
 }
 
