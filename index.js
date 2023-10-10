@@ -11,6 +11,7 @@ export const ajv = new Ajv({
   coerceTypes: true,
   strict: false,
   removeAdditional: true,
+  $data: true,
 });
 
 ajv_keywords(ajv, ["transform"]);
