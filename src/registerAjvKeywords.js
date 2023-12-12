@@ -9,6 +9,8 @@ import maskedNumberLength from './keywords/maskedNumberLength.js';
 import minNumber from './keywords/minNumber.js';
 import maxNumber from './keywords/maxNumber.js';
 import vehicleNumber from './keywords/vehicleNumber.js';
+import minDate from './keywords/minDate.js';
+import maxDate from './keywords/maxDate.js';
 
 export default (ajv) => {
   ajv.addKeyword('isNotEmpty', isNotEmpty);
@@ -22,6 +24,8 @@ export default (ajv) => {
   ajv.addKeyword('minNumber', minNumber);
   ajv.addKeyword('maxNumber', maxNumber);
   ajv.addKeyword('vehicleNumber', vehicleNumber);
+  ajv.addKeyword('minDate', minDate);
+  ajv.addKeyword('maxDate', maxDate);
 
   return ajv;
 };
