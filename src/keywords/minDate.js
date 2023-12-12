@@ -7,12 +7,12 @@ const minDate = {
     validate.errors = [
       {
         keyword: 'minDate',
-        message: 'Выберите дату после ' + moment(min).format('DD.MM.YYYY'),
+        message: 'Выберите дату после ' + moment.utc(min).format('DD.MM.YYYY'),
         params: { keyword: 'minDate' }
       }
     ];
 
-    return !data || moment(data).isAfter(moment(min).subtract(1, 'day'));
+    return !data || moment(data).isAfter(moment.utc(min).subtract(1, 'day'));
   }
 };
 
