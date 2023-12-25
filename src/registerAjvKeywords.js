@@ -11,6 +11,7 @@ import maxNumber from './keywords/maxNumber.js';
 import vehicleNumber from './keywords/vehicleNumber.js';
 import minDate from './keywords/minDate.js';
 import maxDate from './keywords/maxDate.js';
+import bodyNumber from './keywords/bodyNumber.js';
 
 export default (ajv) => {
   ajv.addKeyword('isNotEmpty', isNotEmpty);
@@ -26,6 +27,7 @@ export default (ajv) => {
   ajv.addKeyword('vehicleNumber', vehicleNumber);
   ajv.addKeyword('minDate', minDate);
   ajv.addKeyword('maxDate', maxDate);
+  ajv.addKeyword('bodyNumber', bodyNumber);
 
   return ajv;
 };
