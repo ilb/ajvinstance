@@ -1,9 +1,9 @@
-import Ajv from 'ajv';
-import JSONSchemaBridge from 'uniforms-bridge-json-schema';
-import localize from 'ajv-i18n';
-import registerAjvKeywords from './src/registerAjvKeywords.js';
+import Ajv from "ajv";
+import { JSONSchemaBridge } from "uniforms-bridge-json-schema";
+import ajvlocale from "./src/ajvlocale.js";
+import registerAjvKeywords from "./src/registerAjvKeywords.js";
 
-import ajv_keywords from 'ajv-keywords';
+import ajv_keywords from "ajv-keywords";
 
 export const ajv = new Ajv({
   allErrors: true,
@@ -16,21 +16,21 @@ export const ajv = new Ajv({
 
 ajv_keywords(ajv, ["transform"]);
 
-ajv.addKeyword('uniforms');
-ajv.addKeyword('options');
+ajv.addKeyword("uniforms");
+ajv.addKeyword("options");
 
 // email or empty string
 ajv.addFormat(
-  'email',
-  /(^[a-z\d.!#$%&'*+/=?^_`{|}~-]+@[a-z\d](?:[a-z\d-]{0,61}[a-z\d])?(?:\.[a-z\d](?:[a-z\d-]{0,61}[a-z\d])?)*$)|(^$)/i
+  "email",
+  /(^[a-z\d.!#$%&'*+/=?^_`{|}~-]+@[a-z\d](?:[a-z\d-]{0,61}[a-z\d])?(?:\.[a-z\d](?:[a-z\d-]{0,61}[a-z\d])?)*$)|(^$)/i,
 );
 
 registerAjvKeywords(ajv);
 
-function createValidator(schema, additionalValidator) {
+const createValidator = (schema, additionalValidator) => {
   const validator = ajv.compile(schema);
 
-  return (model) => {
+  return model => {
     let errors = [];
 
     validator(model);
@@ -38,18 +38,22 @@ function createValidator(schema, additionalValidator) {
     if (validator.errors && validator.errors.length) {
       errors = validator.errors;
     }
-
-    errors.length && localize.ru(errors);
-
     if (additionalValidator) {
-      errors = errors.concat(additionalValidator(model));
+      const additionalValidatorClass = new additionalValidator(model);
+      const error = additionalValidatorClass.validate(model);
+
+      if (error) {
+        errors = errors.concat(error);
+      }
     }
 
     if (errors.length) {
+      ajvlocale(errors);
+
       return { details: errors };
     }
   };
-}
+};
 
 export function createSchemaBridge(schema, additionalValidator) {
   return new JSONSchemaBridge(schema, createValidator(schema, additionalValidator));
